@@ -1,5 +1,5 @@
 import { JwtPayload } from "jsonwebtoken";
-import { Model } from "mongoose";
+import { Model, Schema } from "mongoose";
 
 interface BaseFields {
   _id: string;
@@ -28,6 +28,14 @@ export interface User extends Model<IUser, object, IUserMethods> {
 // ! ====== BLACKLIST TOKEN ======
 export interface BlacklistToken extends BaseFields {
   token: string;
+}
+// ! ======
+
+// ! ====== BLACKLIST TOKEN ======
+export interface Todo extends BaseFields {
+  title: string;
+  isCompleted: boolean;
+  user: Schema.Types.ObjectId;
 }
 // ! ======
 
