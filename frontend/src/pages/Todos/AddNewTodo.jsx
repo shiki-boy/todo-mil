@@ -6,11 +6,16 @@ import FormLabel from '@/components/Forms/Helpers/FormLabel'
 import Checkbox from '@/components/Checkbox'
 import Button from '@/components/Button'
 import useApi from '@/hooks/useApi'
-import { createTodoURL } from '@/router/apiEndpoint'
+import { completeAllTodoURL, createTodoURL } from '@/router/apiEndpoint'
 import UiContext from '@/context/UiContext'
 
 const AddNewTodo = ( { allCompleted, refreshTodos } ) => {
   const { mutate, isLoading, isSuccess } = useApi( 'post', createTodoURL )
+
+  const { mutate: markAllComplete, isSuccess: markedAllComplete } = useApi(
+    'post',
+    completeAllTodoURL,
+  )
 
   const { setToast } = useContext( UiContext )
 
@@ -26,20 +31,31 @@ const AddNewTodo = ( { allCompleted, refreshTodos } ) => {
     }
   }, [ isSuccess ] )
 
+  useEffect( () => {
+    if ( markedAllComplete ) {
+      refreshTodos()
+      setToast( {
+        message: 'Marked all as complete',
+        type: 'info',
+      } )
+    }
+  }, [ markedAllComplete ] )
+
   const saveTodo = () => {
+    setTitle( '' )
     mutate( { title } )
   }
 
-  return(
+  return (
     <div className='add-todo'>
-      <Checkbox value={ allCompleted } />
+      <Checkbox checked={ allCompleted } onChange={ () => markAllComplete() } />
 
       <FormLabel name='todo' field='Add New Todo'>
         <input
           type='text'
           placeholder='Add New Todo'
           value={ title }
-          onChange = { ( e ) => setTitle( e.target.value ) }
+          onChange={ ( e ) => setTitle( e.target.value ) }
         />
       </FormLabel>
 

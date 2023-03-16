@@ -72,6 +72,21 @@ class TodoController {
       next(error);
     }
   };
+
+  public completeAll = async (
+    req: RequestWithUser,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+     
+      await this.todoService.completeAll(req.user)
+
+      res.status(204).json({ message: "Marked all as completed" });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export default TodoController;

@@ -1,4 +1,4 @@
-import { Fragment, useMemo } from 'react'
+import { useMemo } from 'react'
 
 import './Todos.scss'
 
@@ -8,6 +8,7 @@ import Loader from '@/components/Loader'
 
 import Todo from './Todo'
 import AddNewTodo from './AddNewTodo'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 const Todos = () => {
   const { data: todos, isLoading } = useApi( 'getList', listTodosURL )
@@ -30,16 +31,20 @@ const Todos = () => {
 
   return (
     <div className='todos'>
-      <AddNewTodo refreshTodos={ refreshTodos } />
+      <AddNewTodo
+        refreshTodos={ refreshTodos }
+        allCompleted={ 0 === todosRemainingCount }
+      />
 
       {0 === todos.length && <p>No todos</p>}
 
-      {todos
-        .map( ( todo ) => (
-          <Fragment key={ todo._id }>
+      <TransitionGroup>
+        {todos.map( ( todo ) => (
+          <CSSTransition key={ todo._id } timeout={ 500 } classNames='zoom'>
             <Todo { ...todo } refreshTodos={ refreshTodos } />
-          </Fragment>
+          </CSSTransition>
         ) )}
+      </TransitionGroup>
 
       <div className='info'>
         <p>Remaining: {todosRemainingCount}</p>

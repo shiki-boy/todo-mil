@@ -7,11 +7,14 @@ import { LogoutIcon } from '@/assets/icons'
 import Icon from '@/components/Icon'
 import AuthContext from '@/context/AuthContext'
 import useLogout from '@/hooks/useLogout'
+import useOnClickOutside from '@/hooks/useOnClickOutside'
 
 const Header = () => {
   const { userData } = useContext( AuthContext )
 
   const { logout } = useLogout()
+
+  const dropdownContainer = useOnClickOutside( () => setShowMenu( false ) )
 
   const [ showMenu, setShowMenu ] = useState( false )
 
@@ -27,7 +30,7 @@ const Header = () => {
       />
 
       {showMenu && (
-        <div className='menu'>
+        <div className='menu' ref={ dropdownContainer }>
           <div onClick={ logout }>
             <Icon IconComponent={ LogoutIcon } />
             Logout

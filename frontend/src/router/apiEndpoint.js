@@ -7,7 +7,8 @@ const loginURL = `${ base }/auth/login`,
       listTodosURL = `${ base }/todos`,
       createTodoURL = `${ base }/todos`,
       deleteTodoURL = `${ base }/todos`,
-      updateTodoURL = ( id ) => `${ base }/todos/${ id }`
+      updateTodoURL = ( id ) => `${ base }/todos/${ id }`,
+      completeAllTodoURL = `${ base }/todos/complete-all`
 
 export {
   loginURL,
@@ -18,4 +19,5 @@ export {
   createTodoURL,
   deleteTodoURL,
   updateTodoURL,
+  completeAllTodoURL,
 }

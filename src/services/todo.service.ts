@@ -1,3 +1,5 @@
+import { UpdateWriteOpResult } from "mongoose";
+
 import { Todo, User } from "@/interfaces/models.interface";
 import { UpsertTodoDto } from "@/dtos/todo/createTodo";
 import todoModel from "@/models/Todo";
@@ -18,6 +20,10 @@ class TodoService {
 
   public async deleteTodo(id: string, user: User): Promise<Todo> {
     return todoModel.findOneAndDelete({ _id: id, user });
+  }
+
+  public async completeAll(user: User): Promise<UpdateWriteOpResult> {
+    return todoModel.updateMany({user }, { isCompleted: true});
   }
 }
 

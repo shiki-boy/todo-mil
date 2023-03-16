@@ -1,10 +1,10 @@
-import { Router } from 'express';
-import TodoController from '@controllers/todo.controller';
-import { Routes } from '@interfaces/routes.interface';
-import authenticate from '@/middlewares/authenticate';
+import { Router } from "express";
+import TodoController from "@controllers/todo.controller";
+import { Routes } from "@interfaces/routes.interface";
+import authenticate from "@/middlewares/authenticate";
 
 class TodoRoute implements Routes {
-  public path = '/api/todos';
+  public path = "/api/todos";
   public router = Router();
   public todoController = new TodoController();
 
@@ -13,13 +13,35 @@ class TodoRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}`, authenticate, this.todoController.listTodos);
+    this.router.get(
+      `${this.path}`,
+      authenticate,
+      this.todoController.listTodos
+    );
 
-    this.router.post(`${this.path}`, authenticate, this.todoController.createTodo);
+    this.router.post(
+      `${this.path}`,
+      authenticate,
+      this.todoController.createTodo
+    );
 
-    this.router.put(`${this.path}/:id`, authenticate, this.todoController.updateTodo);
+    this.router.put(
+      `${this.path}/:id`,
+      authenticate,
+      this.todoController.updateTodo
+    );
 
-    this.router.delete(`${this.path}/:id`, authenticate, this.todoController.deleteTodo);
+    this.router.delete(
+      `${this.path}/:id`,
+      authenticate,
+      this.todoController.deleteTodo
+    );
+
+    this.router.post(
+      `${this.path}/complete-all`,
+      authenticate,
+      this.todoController.completeAll
+    );
   }
 }
 
