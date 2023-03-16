@@ -9,7 +9,7 @@ const errorMiddleware = (
   next: NextFunction
 ) => {
   try {
-    const status: number = res.statusCode || 500;
+    const status: number = error.status || res.statusCode || 500;
     const message: string =
       status === 422
         ? JSON.parse(error.message)

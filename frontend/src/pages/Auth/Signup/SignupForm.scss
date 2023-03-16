@@ -1,0 +1,12 @@
+@import '@/theme/variables.scss';
+
+body {
+  overflow-x: hidden;
+}
+
+.signup-form {
+  width: 30rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
