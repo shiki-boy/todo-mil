@@ -1,0 +1,14 @@
+@import '@/theme/variables.scss';
+
+.add-todo {
+    display: flex;   
+    gap: $spacing-2;
+
+    label {
+        flex: 1;
+    }
+
+    button {
+        height: fit-content;
+    }
+}

@@ -5,7 +5,7 @@ import { CloseIcon } from '@/assets/icons'
 import Checkbox from '@/components/Checkbox'
 import Icon from '@/components/Icon'
 import useApi, { UseInvalidateEndpoint } from '@/hooks/useApi'
-import { deleteTodoURL, updateTodoURL } from '@/router/apiEndpoint'
+import { deleteTodoURL, listTodosURL, updateTodoURL } from '@/router/apiEndpoint'
 import classNames from 'classnames'
 
 const Todo = ( { title, isCompleted, _id: id } ) => {
@@ -13,7 +13,7 @@ const Todo = ( { title, isCompleted, _id: id } ) => {
 
   const { mutate: updateTodo, isSuccess: todoUpdated } = useApi( 'put', updateTodoURL( id ) )
 
-  const refreshTodos = UseInvalidateEndpoint( updateTodoURL( id ) )
+  const refreshTodos = UseInvalidateEndpoint( listTodosURL )
 
   useEffect( () => {
     if ( todoUpdated ) {
