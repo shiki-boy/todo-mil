@@ -20,4 +20,13 @@
             }
         }
     }
+
+    .info {
+        display: flex;
+        gap: $spacing-3;
+
+        p {
+            font-size: 14px;
+        }
+    }
 }

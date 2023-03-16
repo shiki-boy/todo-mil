@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useMemo } from 'react'
 
 import './Todos.scss'
 
@@ -14,27 +14,38 @@ const Todos = () => {
 
   const refreshTodos = UseInvalidateEndpoint( listTodosURL )
 
+  const todosRemainingCount = useMemo(
+    () => todos?.filter( ( todo ) => !todo.isCompleted ).length,
+    [ todos ],
+  )
+
+  const todosCompletedCount = useMemo(
+    () => todos?.filter( ( todo ) => todo.isCompleted ).length,
+    [ todos ],
+  )
+
   if ( isLoading ) {
     return <Loader message='Fetching todos...' />
   }
 
-  return(
+  return (
     <div className='todos'>
-      <AddNewTodo refreshTodos={ refreshTodos }/>
+      <AddNewTodo refreshTodos={ refreshTodos } />
 
       {0 === todos.length && <p>No todos</p>}
 
-      {todos.filter( ( todo ) => !todo.isCompleted ).map( ( todo ) => (
-        <Fragment key={ todo._id }>
-          <Todo { ...todo } refreshTodos= { refreshTodos } />
-        </Fragment>
-      ) )}
+      {todos
+        .map( ( todo ) => (
+          <Fragment key={ todo._id }>
+            <Todo { ...todo } refreshTodos={ refreshTodos } />
+          </Fragment>
+        ) )}
 
-      {todos.filter( ( todo ) => todo.isCompleted ).map( ( todo ) => (
-        <Fragment key={ todo._id }>
-          <Todo { ...todo } refreshTodos={ refreshTodos } />
-        </Fragment>
-      ) )}
+      <div className='info'>
+        <p>Remaining: {todosRemainingCount}</p>
+
+        <p>Completed: {todosCompletedCount}</p>
+      </div>
     </div>
   )
 }

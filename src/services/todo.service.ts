@@ -9,7 +9,7 @@ class TodoService {
 
   // NOTE: can apply pagination here, but choosing not to
   public async listTodos(user: User): Promise<Todo[]> {
-    return todoModel.find({ user });
+    return todoModel.find({ user }).sort({ isCompleted: 1, updatedAt: -1 });
   }
 
   public async updateTodo(data: UpsertTodoDto, id: string): Promise<Todo> {
