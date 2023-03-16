@@ -1,0 +1,23 @@
+@import '@/theme/variables.scss';
+
+.todos {
+    .todo {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        border-bottom: 1px dashed $grey-2;
+
+        .title {
+            margin: $spacing-1 0;
+            flex: 1;
+        }
+
+        &.checked {
+            opacity: 0.7;
+
+            .title {
+                text-decoration: line-through;
+            }
+        }
+    }
+}

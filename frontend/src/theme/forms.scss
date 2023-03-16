@@ -116,6 +116,7 @@ textarea {
     width: 30px;
     border-color: transparent;
     appearance: none;
+    cursor: pointer;
 
     &::before {
       border: solid 2px $grey-3;

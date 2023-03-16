@@ -3,6 +3,16 @@ const base = '/api'
 
 const loginURL = `${ base }/auth/login`,
       logoutURL = `${ base }/auth/logout`,
-      signupURL = `${ base }/auth/register`
+      signupURL = `${ base }/auth/register`,
+      listTodosURL = `${ base }/todos`,
+      deleteTodoURL = `${ base }/todos`,
+      updateTodoURL = ( id ) => `${ base }/todos/${ id }`
 
-export { loginURL, logoutURL, signupURL }
+export {
+  loginURL,
+  logoutURL,
+  signupURL,
+  listTodosURL,
+  deleteTodoURL,
+  updateTodoURL,
+}

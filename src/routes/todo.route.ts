@@ -4,7 +4,7 @@ import { Routes } from '@interfaces/routes.interface';
 import authenticate from '@/middlewares/authenticate';
 
 class TodoRoute implements Routes {
-  public path = '/api/todo';
+  public path = '/api/todos';
   public router = Router();
   public todoController = new TodoController();
 
