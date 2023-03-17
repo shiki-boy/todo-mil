@@ -15,8 +15,12 @@
         &.checked {
             opacity: 0.7;
 
-            .title {
+            .title:not(input) {
                 text-decoration: line-through;
+            }
+
+            input.title {
+                opacity: 1;
             }
         }
     }
