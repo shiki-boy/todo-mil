@@ -42,8 +42,15 @@ const AddNewTodo = ( { allCompleted, refreshTodos } ) => {
   }, [ markedAllComplete ] )
 
   const saveTodo = () => {
+    if ( !title ) return
     setTitle( '' )
     mutate( { title } )
+  }
+
+  const handleKeyUp = ( e ) => {
+    if ( 13 === e.keyCode ) {
+      saveTodo()
+    }
   }
 
   return (
@@ -56,6 +63,7 @@ const AddNewTodo = ( { allCompleted, refreshTodos } ) => {
           placeholder='Add New Todo'
           value={ title }
           onChange={ ( e ) => setTitle( e.target.value ) }
+          onKeyUp={ handleKeyUp }
         />
       </FormLabel>
 
